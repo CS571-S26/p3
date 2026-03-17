@@ -6,7 +6,7 @@ export default function AboutPage() {
     <div className="w-100 h-100 d-flex justify-content-center align-items-center">
       <Card className='m-4 p-2'>
         <Card.Body className='text-center'>
-          <h2>About</h2> 
+          <h2>Save for Later</h2> 
           <p>Example declarative routing with react-router-dom.</p>
         </Card.Body>
       </Card>
