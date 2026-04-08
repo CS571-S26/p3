@@ -1,0 +1,10 @@
+[
+  { "name": "The Botanist Social", "cuisine": "Cocktail Bar", "cost": "$$", "website": "https://thebotanistsocial.com", "image": "https://images.squarespace-cdn.com/content/v1/60f43f693dabd62900d86129/358a2e66-1a70-445a-ab39-610117f93581/_DSC0929+2.jpg" },
+  { "name": "Bassett Street Brunch Club", "cuisine": "Breakfast", "cost": "$$", "website": "https://bassettstreetbrunchclub.com", "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/04/44/f6/breakfast-morning-noon.jpg?w=800&h=500&s=1" },
+  { "name": "RED", "cuisine": "Japanese", "cost": "$$$", "website": "https://red-madison.com", "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/43/fd/fa/sushi.jpg?w=900&h=500&s=1" },
+  { "name": "The Harvey House", "cuisine": "American", "cost": "$$$", "website": "https://theharveyhouse.com", "image": "https://lh3.googleusercontent.com/p/AF1QipMLcGv63J0m70CxfUkjZzXaXF8KxawEG-piLjot=s1360-w1360-h1020-rw" },
+  { "name": "Dotty Dumpling’s Dowry", "cuisine": "American", "cost": "$$", "website": "https://dottydumplingsdowry.com", "image": "https://onwisconsin.uwalumni.com/content/uploads/2024/05/Dotty-Dumplings-Hamburger-Mar-21-2024.jpg" },
+  { "name": "Paul’s Pel’meni", "cuisine": "Eastern European", "cost": "$", "website": "https://paulspelmeni.com", "image": "https://badgerherald.com/wp-content/uploads/2013/10/586x286FoodPaulsPelmeni.jpg" },
+  { "name": "Mickies Dairy Bar", "cuisine": "American", "cost": "$", "website": "https://mickiesdairybar.com", "image": "https://www.jsonline.com/gcdn/presto/2018/10/09/PMJS/b59265ce-a642-4ea9-b106-035495788d15-IMG_2050.jpg?crop=3684,2116,x0,y513&width=3200&height=1839&format=pjpg&auto=webp" },
+  { "name": "The Stuffed Olive - Madison", "cuisine": "Cocktail Bar", "cost": "$$", "website": "https://stuffedolive.com", "image": "https://images.getbento.com/accounts/11c7aa3a54e4c84eb55b289fe7b165ec/media/images/54333SIC_2022Bar_1.jpg?w=1000&fit=crop&auto=compress,format&cs=origin&h=562" }
+]
