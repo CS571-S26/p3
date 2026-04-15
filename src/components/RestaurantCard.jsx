@@ -14,15 +14,14 @@ export default function RestaurantCard(props) {
 );
 
     return (
-        <Card className="h-100">
+        <Card className="h-100 shadow-sm">
             <Card.Img variant="top" src={props.image} style={{ height: "200px", objectFit: "cover" }} />
             <Card.Body>
                 <Card.Title>{props.name}</Card.Title>
                 <p>{props.cuisine}</p>
                 <p>{props.cost}</p>
-            </Card.Body>
             
-            <Card.Footer>
+            
                 {(props.page === "discoverable" || props.page === "save") && ( <>
                 <Button
                     variant={"primary"}
@@ -73,7 +72,7 @@ export default function RestaurantCard(props) {
                         {"X"}
                     </Button></>
                 )}
-            </Card.Footer>
+            </Card.Body>
         </Card>
         
     );

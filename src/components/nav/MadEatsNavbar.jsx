@@ -7,7 +7,7 @@ import logo from "../../imgs/logo.png";
 export default function MadEatsNavbar(props) {
     return (
     <>
-      <Navbar expand="sm" className="navbar" collapseOnSelect>
+      <Navbar expand="sm" className="navbar shadow-sm" collapseOnSelect>
         <Container>
           <Navbar.Brand as={Link} to="/">
             <Image src={logo} alt="logo" style={{ width: "120px" }} fluid />
