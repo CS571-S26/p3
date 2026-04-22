@@ -1,4 +1,4 @@
-import { Button, Card, Carousel } from "react-bootstrap";
+import { Button, Card, Carousel, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useState, useContext} from "react";
 
 import RestaurantsDataContext from "../contexts/RestaurantsDataContext";
@@ -29,29 +29,38 @@ export default function RestaurantCard(props) {
                     >
                         {"Website"}
                 </Button>
-                <Button
-                    variant={saved ? "danger" : "outline-danger"}
-                    style={{ marginLeft: "9.5rem", marginRight: "0.5rem" }}
-                    onClick={() => {
-                        if (!saved) {
-                            move(props.page, "save", props.name);
-                        } else {
-                            move("save", "discoverable", props.name);
-                        }
-                        toggleSaved(!saved);
-                    }}
+                <OverlayTrigger
+                    placement="bottom"
+                    overlay={ props.page === "discoverable" ? <Tooltip>Save Restaurant</Tooltip> : <Tooltip>Remove Restaurant</Tooltip>}
                 >
-                    {"♡"}
-                </Button>
-                <Button
-                    variant={"outline-primary"}
-                    onClick={() => {
-                        move(props.page, "review", props.name)
-                    }} 
+                    <Button
+                        variant={saved ? "danger" : "outline-danger"}
+                        style={{ marginLeft: "9.5rem", marginRight: "0.5rem" }}
+                        onClick={() => {
+                            if (!saved) {
+                                move(props.page, "save", props.name);
+                            } else {
+                                move("save", "discoverable", props.name);
+                            }
+                            toggleSaved(!saved);
+                        }}
                     >
-                        {"✎"}
-                </Button>
-                
+                        {"♡"}
+                    </Button>
+                </OverlayTrigger>
+                <OverlayTrigger
+                    placement="bottom"
+                    overlay={<Tooltip>Write a Review</Tooltip>}
+                >
+                    <Button
+                        variant={"outline-primary"}
+                        onClick={() => {
+                            move(props.page, "review", props.name)
+                        }} 
+                        >
+                            {"✎"}
+                    </Button>
+                </OverlayTrigger>
                 </>
                 )}
 

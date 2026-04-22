@@ -128,9 +128,9 @@ export default function DiscoverPage() {
             <Container>
                 <Row className="g-4 mt-3">
                     {restaurants.discoverable.filter((rest) => {
-                        // const matchesCuisine = cuisineSelected.size === 0 || cuisineSelected.has(rest.cuisine);
                         const matchesPrice = priceSelected === "" || rest.cost === priceSelected;
-                        return matchesPrice;
+                        const matchesCuisine = cuisineSelected.size === 0 || cuisineSelected.has(rest.cuisine);
+                        return matchesPrice && matchesCuisine;
                     })
                     .map((rest) => (
                         <Col xs={12} md={6} lg={4} key={rest.name}>
