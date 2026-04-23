@@ -9,14 +9,24 @@ export default function DiscoverPage() {
     const [restaurants] = useContext(RestaurantsDataContext);
     const [cuisineSelected, setCuisineSelected] = useState(new Set());
     const [priceSelected, setPriceSelected] = useState("");
+    const [vibeSelected, setVibeSelected] = useState(new Set());
 
-    const toggleOption = (option) => {
+    const toggleCuisine = (option) => {
         setCuisineSelected((prev) => {
             const next = new Set(prev);
             next.has(option) ? next.delete(option) : next.add(option);
             return next;
         });
     };
+
+    const toggleVibe = (option) => {
+        setVibeSelected((prev) => {
+            const next = new Set(prev);
+            next.has(option) ? next.delete(option) : next.add(option);
+            return next;
+        });
+    };
+    
 
     return (
         <div>
@@ -61,25 +71,25 @@ export default function DiscoverPage() {
                         <ButtonGroup>
                             <Button
                                 variant={cuisineSelected.has("American") ? "danger" : "outline-danger"}
-                                onClick={() => toggleOption("American")}
+                                onClick={() => toggleCuisine("American")}
                             >
                                 American
                             </Button>
                             <Button
                                 variant={cuisineSelected.has("Asian") ? "danger" : "outline-danger"}
-                                onClick={() => toggleOption("Asian")}
+                                onClick={() => toggleCuisine("Asian")}
                             >
                                 Asian
                             </Button>
                             <Button
                                 variant={cuisineSelected.has("European") ? "danger" : "outline-danger"}
-                                onClick={() => toggleOption("European")}
+                                onClick={() => toggleCuisine("European")}
                             >
                                 European
                             </Button>
                             <Button
                                 variant={cuisineSelected.has("Latin") ? "danger" : "outline-danger"}
-                                onClick={() => toggleOption("Latin")}
+                                onClick={() => toggleCuisine("Latin")}
                             >
                                 Latin
                             </Button>
@@ -96,41 +106,80 @@ export default function DiscoverPage() {
                     <div className="px-2">
                         <ButtonGroup>
                             <Button
-                                variant={cuisineSelected.has("American") ? "danger" : "outline-danger"}
-                                onClick={() => toggleOption("American")}
+                                variant={vibeSelected.has("Upscale") ? "primary" : "outline-primary"}
+                                onClick={() => toggleVibe("Upscale")}
                             >
-                                American
+                                Upscale
                             </Button>
                             <Button
-                                variant={cuisineSelected.has("Asian") ? "danger" : "outline-danger"}
-                                onClick={() => toggleOption("Asian")}
+                                variant={vibeSelected.has("Quiet") ? "primary" : "outline-primary"}
+                                onClick={() => toggleVibe("Quiet")}
                             >
-                                Asian
+                                Quiet
                             </Button>
                             <Button
-                                variant={cuisineSelected.has("European") ? "danger" : "outline-danger"}
-                                onClick={() => toggleOption("European")}
+                                variant={vibeSelected.has("Family-friendly") ? "primary" : "outline-primary"}
+                                style = {{ fontSize: "0.8rem" }}
+                                onClick={() => toggleVibe("Family-friendly")}
                             >
-                                European
+                                Family-friendly
                             </Button>
                             <Button
-                                variant={cuisineSelected.has("Latin") ? "danger" : "outline-danger"}
-                                onClick={() => toggleOption("Latin")}
+                                variant={vibeSelected.has("Casual") ? "primary" : "outline-primary"}
+                                onClick={() => toggleVibe("Casual")}
                             >
-                                Latin
+                                Casual
+                            </Button>
+                        </ButtonGroup>
+                        <ButtonGroup>
+                            <Button
+                                variant={vibeSelected.has("Romantic") ? "primary" : "outline-primary"}
+                                onClick={() => toggleVibe("Romantic")}
+                            >
+                                Romantic
+                            </Button>
+                            <Button
+                                variant={vibeSelected.has("Trendy") ? "primary" : "outline-primary"}
+                                onClick={() => toggleVibe("Trendy")}
+                            >
+                                Trendy
+                            </Button>
+                            <Button
+                                variant={vibeSelected.has("Outdoor seating") ? "primary" : "outline-primary"}
+                                style = {{ fontSize: "0.8rem" }}
+                                onClick={() => toggleVibe("Outdoor seating")}
+                            >
+                                Outdoor seating
+                            </Button>
+                            <Button
+                                variant={vibeSelected.has("Lively") ? "primary" : "outline-primary"}
+                                onClick={() => toggleVibe("Lively")}
+                            >
+                                Lively
                             </Button>
                         </ButtonGroup>
                     </div>
                 </Dropdown.Menu>
             </Dropdown>
-            <Button style={{ borderRadius: "50px" }} variant="light" onClick={() => {setPriceSelected(""); cuisineSelected(new Set())}}>Clear Filters</Button>
+            <Button 
+                style={{ borderRadius: "50px" }} 
+                variant="light" 
+                onClick={() => {
+                    setPriceSelected(""); 
+                    setCuisineSelected(new Set());
+                    setVibeSelected(new Set());
+                }}
+            >
+                Clear Filters
+            </Button>
             </div>
             <Container>
                 <Row className="g-4 mt-3">
                     {restaurants.discoverable.filter((rest) => {
                         const matchesPrice = priceSelected === "" || rest.cost === priceSelected;
-                        const matchesCuisine = cuisineSelected.size === 0 || cuisineSelected.has(rest.cuisine);
-                        return matchesPrice && matchesCuisine;
+                        const matchesCuisine = cuisineSelected.size === 0 || rest.cuisine.some(c => cuisineSelected.has(c));
+                        const matchesVibe = vibeSelected.size === 0 || rest.vibe.some(v => vibeSelected.has(v));
+                        return matchesPrice && matchesCuisine && matchesVibe;
                     })
                     .map((rest) => (
                         <Col xs={12} md={6} lg={4} key={rest.name}>
