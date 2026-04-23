@@ -17,7 +17,7 @@ export default function MadEatsNavbar(props) {
             <Nav className="ms-auto gap-4">
               <Nav.Link as={Link} to="/">Discover</Nav.Link>
               <Nav.Link as={Link} to="/save-for-later">Saved ♡</Nav.Link>
-              <Nav.Link as={Link} to="/review">Review ✎</Nav.Link>
+              <Nav.Link as={Link} to="/review">Reviewed ✎</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

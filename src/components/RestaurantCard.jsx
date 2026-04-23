@@ -45,42 +45,78 @@ export default function RestaurantCard(props) {
                             toggleSaved(!saved);
                         }}
                     >
-                        {"♡"}
+                    {props.page === "discoverable" ? <>{"♡"}</> : <>{"❤︎"}</>}
                     </Button>
                 </OverlayTrigger>
-                <OverlayTrigger
-                    placement="bottom"
-                    overlay={<Tooltip>Write a Review</Tooltip>}
-                >
-                    <Button
-                        variant={"outline-primary"}
-                        onClick={() => {
-                            move(props.page, "review", props.name)
-                        }} 
-                        >
-                            {"✎"}
-                    </Button>
-                </OverlayTrigger>
-                </>
+                
+                {(props.page !== "discoverable" && props.page !== "review") && (<>
+                    <OverlayTrigger
+                        placement="bottom"
+                        overlay={<Tooltip>{showMore ? "Hide Review" : "Write a Review"}</Tooltip>}
+                    >
+                        <Button
+                            variant={showMore ? "primary" : "outline-primary"}
+                            onClick={() => {
+                                toggleShowMore(!showMore);
+                            }} 
+                            >
+                                {showMore ? "Hide Review" : "Review✎"}
+                        </Button>
+                    </OverlayTrigger>
+
+                </>)}</>)}
+
+                {props.page  !== "review" && showMore && (//dont show the submition form when already reviewed
+                    <div style={{ marginTop: "1rem" }}>
+                        <form>
+                            <textarea
+                                placeholder="Write your review..."
+                                rows="4"
+                                className="form-control"
+                                onChange={(e) => props.setReview(e.target.value)}
+                            ></textarea>
+
+                            <Button
+                                variant="success"
+                                style={{ marginTop: "0.5rem" }}
+                                onClick={() => {move(props.page, "review", props.name)}}
+                            >
+                                Submit Review
+                            </Button>
+                        </form>
+                    </div>
                 )}
 
                 {props.page === "review" && (<>
                     <Button
                         variant={"primary"}
                         style={{ marginRight: "10.5rem"}}
-                    >
-                        {"Write Review"}
+                        onClick={() => toggleShowMore(!showMore)}>
+                        {showMore ? "Hide Review" : "View My Review"}
                     </Button>
-                    <Button
-                        variant={"danger"}
-                        onClick={() => {
-                            move(props.page, "discoverable", props.name)
-                            alert("Are you sure you want to remove this review?")
-                        }} 
+                    
+                    <OverlayTrigger
+                        placement="bottom"
+                        overlay={<Tooltip>{"Delete Review"}</Tooltip>}
                     >
-                        {"X"}
-                    </Button></>
-                )}
+                        <Button
+                            variant={"danger"}
+                            onClick={() => {//TODO: we should give the 'are you sure?' as a modal since if they click it by accident, there is no going back
+                                move(props.page, "discoverable", props.name)
+                                alert("Are you sure you want to remove this review? It will be removed from 'Saved' too.")
+                            }} 
+                        >
+                            {"Delete Review ✗"}
+                        </Button>
+                    </OverlayTrigger>
+                    {showMore && (
+                        <div style={{ marginTop: "1rem"}}>
+                            <div className="form-control">
+                                {props.reviews}
+                            </div>
+                        </div>
+                    )}
+                </>)}
             </Card.Body>
         </Card>
         

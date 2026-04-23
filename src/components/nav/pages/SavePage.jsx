@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
 import RestaurantsDataContext from "../../../contexts/RestaurantsDataContext";
@@ -20,7 +20,7 @@ export default function SavePage(props) {
             <Row>
                 {restaurants.save.map((rest) => (
                     <Col xs={12} md={6} lg={4} key={rest.id}>
-                        <RestaurantCard {...rest} page="save" />
+                        <RestaurantCard {...rest} page="save"/>
                     </Col>
                 ))}
             </Row>

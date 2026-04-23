@@ -4,7 +4,7 @@ import {Container, Row, Col } from "react-bootstrap";
 import RestaurantsDataContext from "../../../contexts/RestaurantsDataContext";
 import RestaurantCard from "../../RestaurantCard";
 
-export default function DiscoverPage() {
+export default function ReviewedPage() {
     const [restaurants] = useContext(RestaurantsDataContext);
 
     return <div>

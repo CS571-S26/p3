@@ -31,8 +31,6 @@ export default function MadEats() {
         });
         
     }, []);
-
-    console.log(restaurants)
     
     const move = (from, to, restName) => {
         if (from === to) { 
