@@ -14,25 +14,84 @@ export default function MadEats() {
     });
 
     useEffect(() => {
-        const currRestaurants = restaurantsJSON
+        const currRestaurants = restaurantsJSON;
 
-        //const discoverableRestaurants = JSON.parse(sessionStorage.getItem("discoverable")) || [];
-        const savedRestaurants = JSON.parse(sessionStorage.getItem("saved")) || [];
-        const reviewedRestaurants = JSON.parse(sessionStorage.getItem("review")) || [];
+        const savedRestaurants =
+            JSON.parse(sessionStorage.getItem("saved")) || [];
 
-        const discoverable = currRestaurants.filter(rest => !savedRestaurants.includes(rest.name) && !reviewedRestaurants.includes(rest.name))
-        const save = currRestaurants.filter(rest => savedRestaurants.includes(rest.name))
-        const review = currRestaurants.filter(rest => reviewedRestaurants.includes(rest.name))
- 
-        setRestaurants({   
+        const reviewedRestaurants =
+            JSON.parse(sessionStorage.getItem("review")) || [];
+
+        const discoverable = currRestaurants.filter(
+            rest =>
+                !savedRestaurants.includes(rest.name) &&
+                !reviewedRestaurants.some(r => r.name === rest.name)
+        );
+
+        const save = currRestaurants.filter(rest =>
+            savedRestaurants.includes(rest.name)
+        );
+
+        const review = currRestaurants
+            .filter(rest =>
+                reviewedRestaurants.some(r => r.name === rest.name)
+            )
+            .map(rest => {
+                const match = reviewedRestaurants.find(
+                    r => r.name === rest.name
+                );
+
+                return {
+                    ...rest,
+                    review: match.review
+                };
+            });
+
+        setRestaurants({
             discoverable,
             save,
             review
         });
-        
     }, []);
-    
-    const move = (from, to, restName) => {
+
+    const syncRestaurants = () => {
+        const currRestaurants = restaurantsJSON;
+
+        const savedRestaurants =
+            JSON.parse(sessionStorage.getItem("saved")) || [];
+
+        const reviewedRestaurants =
+            JSON.parse(sessionStorage.getItem("review")) || [];
+
+        const discoverable = currRestaurants.filter(
+            rest =>
+                !savedRestaurants.includes(rest.name) &&
+                !reviewedRestaurants.some(r => r.name === rest.name)
+        );
+
+        const save = currRestaurants.filter(rest =>
+            savedRestaurants.includes(rest.name)
+        );
+
+        const review = currRestaurants
+            .filter(rest =>
+                reviewedRestaurants.some(r => r.name === rest.name)
+            )
+            .map(rest => {
+                const match = reviewedRestaurants.find(
+                    r => r.name === rest.name
+                );
+
+                return {
+                    ...rest,
+                    review: match.review
+                };
+            });
+
+        setRestaurants({ discoverable, save, review });
+    };
+
+    const move = (from, to, restName, reviewText) => {
         if (from === to) { 
             return;
         }
@@ -58,25 +117,41 @@ export default function MadEats() {
             // remove the restaurant from saved restaurants
             else if (from === "save") {
                 const savedRestaurants = JSON.parse(sessionStorage.getItem("saved")) || [];
-                const removed = savedRestaurants.filter((rest) => rest !== restName);
+                const removed = savedRestaurants.filter((rest) => rest.name !== restName);
                 sessionStorage.setItem("saved", JSON.stringify(removed));
             }
 
             // add the restaurant to review
             if (to === "review") {
                 const reviewedRestaurants = JSON.parse(sessionStorage.getItem("review")) || [];
-                if (!reviewedRestaurants.includes(restName)) {
-                    reviewedRestaurants.push(restName);
+                const savedRestaurants = JSON.parse(sessionStorage.getItem("saved")) || [];
+
+                const existing = reviewedRestaurants.find(r => r.name === restName);
+
+                if (existing) {
+                    existing.review = reviewText;
+                } else {
+                    reviewedRestaurants.push({ name: restName, review: reviewText });
                 }
+
+                const updatedSaved = savedRestaurants.filter(name => name !== restName);
+                sessionStorage.setItem("saved", JSON.stringify(updatedSaved));
+
                 sessionStorage.setItem("review", JSON.stringify(reviewedRestaurants));
-            } 
+
+                newRestaurants[to] = [...toPage, { ...toMove, review: reviewText }];
+            }            
             // remove the restaurant from reviewed restaurants
             else if (from === "review") {
-                const reviewedRestaurants = JSON.parse(sessionStorage.getItem("review")) || [];
-                const removed = reviewedRestaurants.filter((rest) => rest !== restName);
+                const reviewedRestaurants =
+                    JSON.parse(sessionStorage.getItem("review")) || [];
+
+                const removed = reviewedRestaurants.filter(
+                    rest => rest.name !== restName
+                );
+
                 sessionStorage.setItem("review", JSON.stringify(removed));
             }
-
             return newRestaurants;
         })
     }

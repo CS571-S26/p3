@@ -1,22 +1,38 @@
 import { Button, Card, Carousel, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useState, useContext} from "react";
+import { useState, useContext, useRef} from "react";
 
 import RestaurantsDataContext from "../contexts/RestaurantsDataContext";
 
 export default function RestaurantCard(props) {
     const [restaurants, setRestaurants, move] = useContext(RestaurantsDataContext);
+    const reviewRef = useRef('');
+    const [rating, setRating] = useState(0);
+    const savedRating = props.review?.rating || 0;
 
     // state for show more toggle and save button
     const [showMore, toggleShowMore] = useState(false);
 
-    const [saved, toggleSaved] = useState(
-    restaurants.save.some(rest => rest.name === props.name)
-);
-
+    const saved = restaurants.save.some(rest => rest.name === props.name);
     return (
         <Card className="h-100 shadow-sm">
             <Card.Img variant="top" src={props.image} style={{ height: "200px", objectFit: "cover" }} />
             <Card.Body>
+                {(props.page === "review" ) && (<>
+                    <div style={{ marginBottom: "1rem"}}>
+                        {[1, 2, 3, 4, 5].map((star) => (
+                            <span
+                                key={star}
+                                style={{
+                                    fontSize: "2.5rem",
+                                    color: star <= savedRating ? "gold" : "gray"
+                                }}
+                            >
+                                ★
+                            </span>
+                        ))}
+                    </div>
+                </>)}
+
                 <Card.Title>{props.name}</Card.Title>
                 <p>{props.cost}</p>
                 <p style={{ color: "gray" }}>{props.cuisine.join(" | ")}</p> 
@@ -42,7 +58,6 @@ export default function RestaurantCard(props) {
                             } else {
                                 move("save", "discoverable", props.name);
                             }
-                            toggleSaved(!saved);
                         }}
                     >
                     {props.page === "discoverable" ? <>{"♡"}</> : <>{"❤︎"}</>}
@@ -70,17 +85,46 @@ export default function RestaurantCard(props) {
                 {props.page  !== "review" && showMore && (//dont show the submition form when already reviewed
                     <div style={{ marginTop: "1rem" }}>
                         <form>
+                            <div style={{ marginBottom: "0.5rem" }}>
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                    <span
+                                        key={star}
+                                        style={{
+                                            fontSize: "1.5rem",
+                                            cursor: "pointer",
+                                            color: star <= rating ? "gold" : "gray"
+                                        }}
+                                        onClick={() => setRating(star)}
+                                    >
+                                        ★
+                                    </span>
+                                ))}
+                            </div>
+
                             <textarea
                                 placeholder="Write your review..."
                                 rows="4"
                                 className="form-control"
-                                onChange={(e) => props.setReview(e.target.value)}
+                                onChange={(e) => reviewRef.current = e.target.value}
                             ></textarea>
 
                             <Button
                                 variant="success"
                                 style={{ marginTop: "0.5rem" }}
-                                onClick={() => {move(props.page, "review", props.name)}}
+                                onClick={(e) => {
+                                    e.preventDefault();
+
+                                    const text = reviewRef.current?.trim();
+
+                                    if (!text || rating === 0) {
+                                        return;
+                                    }
+
+                                    move(props.page, "review", props.name, {
+                                        text: reviewRef.current,
+                                        rating: rating
+                                    });
+                                }}
                             >
                                 Submit Review
                             </Button>
@@ -91,7 +135,7 @@ export default function RestaurantCard(props) {
                 {props.page === "review" && (<>
                     <Button
                         variant={"primary"}
-                        style={{ marginRight: "10.5rem"}}
+                        style={{ marginRight: ".5rem"}}
                         onClick={() => toggleShowMore(!showMore)}>
                         {showMore ? "Hide Review" : "View My Review"}
                     </Button>
@@ -102,18 +146,19 @@ export default function RestaurantCard(props) {
                     >
                         <Button
                             variant={"danger"}
-                            onClick={() => {//TODO: we should give the 'are you sure?' as a modal since if they click it by accident, there is no going back
-                                move(props.page, "discoverable", props.name)
-                                alert("Are you sure you want to remove this review? It will be removed from 'Saved' too.")
+                            onClick={() => {
+                                if (window.confirm("Are you sure you want to remove this review?")) {
+                                    move("review", "discoverable", props.name);
+                                }
                             }} 
                         >
-                            {"Delete Review ✗"}
+                            {"✗"}
                         </Button>
                     </OverlayTrigger>
                     {showMore && (
                         <div style={{ marginTop: "1rem"}}>
                             <div className="form-control">
-                                {props.reviews}
+                                {props.review?.text}
                             </div>
                         </div>
                     )}
