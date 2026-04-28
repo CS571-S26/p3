@@ -10,7 +10,7 @@ export default function RestaurantCard(props) {
     const savedRating = props.review?.rating || 0;
     const [sticker, setSticker] = useState("");
     const savedSticker = props.review?.sticker || "";
-    const stickers = ["😍", "😊", "😐", "😕", "🤢", "💅", "🤌", "🍕", "🍣", "🍔", "🌮", "☕", "🍸", "🔥"];
+    const stickers = ["😍", "😊", "😐", "😕", "🤢", "🥳", "💅", "🤌", "🍕", "🍣", "🍔", "🌮", "☕", "🍸", "🍾", "🍻", "🎉", "🔥"];
 
     // state for show more toggle and save button
     const [showMore, toggleShowMore] = useState(false);
@@ -109,19 +109,29 @@ export default function RestaurantCard(props) {
                                 ))}
                             </div>
                             <div>
-                                {stickers.map((emoji) => (
-                                    <Button 
-                                        key={emoji}
-                                        variant={sticker === emoji ? "danger" : "outline-danger"}
-                                        size="sm"
-                                        style={{ marginRight: "0.25rem", marginBottom: "0.25rem", fontSize: "1.25rem"}}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            setSticker(emoji);
-                                        }}>
-                                            {emoji}
-                                    </Button>
-                                ))}
+                                {stickers.map((emoji) => {
+                                    const selected = sticker === emoji;
+                                    return (
+                                        <Button 
+                                            key={emoji}
+                                            size="sm"
+                                            style={{ 
+                                                marginRight: "0.25rem",
+                                                marginBottom: "0.25rem",
+                                                fontSize: "1.25rem",
+                                                borderRadius: "8px",
+                                                backgroundColor: selected ? "#ae1a1b" : "#fdeaea",
+                                                borderColor: "#e73a3b",
+                                                color: selected ? "white" : "#ae1a1b"
+                                            }}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setSticker(emoji);
+                                            }}>
+                                                {emoji}
+                                        </Button>
+                                    );
+                                })}
                             </div>
                             <textarea
                                 placeholder="Write your review..."
