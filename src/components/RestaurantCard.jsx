@@ -97,12 +97,22 @@ export default function RestaurantCard(props) {
                                 {[1, 2, 3, 4, 5].map((star) => (
                                     <span
                                         key={star}
+                                        role="button"
+                                        tabIndex={0}
+                                        aria-label={`${star} star rating`}
                                         style={{
                                             fontSize: "1.5rem",
                                             cursor: "pointer",
-                                            color: star <= rating ? "gold" : "gray"
+                                            color: star <= rating ? "gold" : "gray",
+                                            marginRight: "0.15rem"
                                         }}
                                         onClick={() => setRating(star)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter" || e.key === " ") {
+                                                e.preventDefault();
+                                                setRating(star);
+                                            }
+                                        }}
                                     >
                                         ★
                                     </span>
