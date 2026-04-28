@@ -10,7 +10,7 @@ export default function RestaurantCard(props) {
     const savedRating = props.review?.rating || 0;
     const [sticker, setSticker] = useState("");
     const savedSticker = props.review?.sticker || "";
-    const stickers = ["😍", "😊", "😐", "😕", "🤢", "🔥", "💅", "🤌", "🍕", "🍣", "🍔", "🌮", "☕", "🍸", "💅", "🔥"];
+    const stickers = ["😍", "😊", "😐", "😕", "🤢", "💅", "🤌", "🍕", "🍣", "🍔", "🌮", "☕", "🍸", "🔥"];
 
     // state for show more toggle and save button
     const [showMore, toggleShowMore] = useState(false);
