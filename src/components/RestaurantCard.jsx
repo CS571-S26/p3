@@ -18,7 +18,7 @@ export default function RestaurantCard(props) {
     const saved = restaurants.save.some(rest => rest.name === props.name);
     return (
         <Card className="h-100 shadow-sm">
-            <Card.Img variant="top" src={props.image} style={{ height: "200px", objectFit: "cover" }} />
+            <Card.Img variant="top" src={props.image} alt={`Photo of ${props.name}`} style={{ height: "200px", objectFit: "cover" }} />
             <Card.Body>
                 {(props.page === "review" ) && (<>
                     <div style={{ marginBottom: "1rem"}}>
@@ -124,6 +124,7 @@ export default function RestaurantCard(props) {
                                         key={emoji}
                                         variant={sticker === emoji ? "danger" : "outline-danger"}
                                         size="sm"
+                                        aria-label={`Select ${emoji} sticker`}
                                         style={{ 
                                             marginRight: "0.25rem",
                                             marginBottom: "0.25rem",
@@ -137,7 +138,9 @@ export default function RestaurantCard(props) {
                                         </Button>
                                 ))}
                             </div>
+                            <label htmlFor={`review-${props.name}`} className="form-label">Review</label>
                             <textarea
+                                id={`review-${props.name}`}
                                 placeholder="Write your review..."
                                 rows="4"
                                 className="form-control"
