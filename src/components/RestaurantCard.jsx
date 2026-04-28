@@ -138,8 +138,6 @@ export default function RestaurantCard(props) {
                                         </Button>
                                 ))}
                             </div>
-                            <p style={{ marginBottom: "0.25rem" }}>Rating</p>
-                            <p style={{ marginBottom: "0.25rem" }}>Choose a vibe</p>
                             <label htmlFor={`review-${props.name}`} className="form-label">Write your review</label>
                             <textarea
                                 id={`review-${props.name}`}
