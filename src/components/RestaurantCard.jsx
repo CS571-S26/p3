@@ -8,6 +8,9 @@ export default function RestaurantCard(props) {
     const reviewRef = useRef('');
     const [rating, setRating] = useState(0);
     const savedRating = props.review?.rating || 0;
+    const [sticker, setSticker] = useState("");
+    const savedSticker = props.review?.sticker || "";
+    const stickers = ["😍", "😊", "😐", "😕", "🤢", "🔥", "💅", "🤌", "🍕", "🍣", "🍔", "🌮", "☕", "🍸", "💅", "🔥"];
 
     // state for show more toggle and save button
     const [showMore, toggleShowMore] = useState(false);
@@ -31,6 +34,11 @@ export default function RestaurantCard(props) {
                             </span>
                         ))}
                     </div>
+                    {savedSticker && (
+                        <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>
+                            {savedSticker}
+                        </div>
+                    )}
                 </>)}
 
                 <Card.Title>{props.name}</Card.Title>
@@ -100,14 +108,27 @@ export default function RestaurantCard(props) {
                                     </span>
                                 ))}
                             </div>
-
+                            <div>
+                                {stickers.map((emoji) => (
+                                    <Button 
+                                        key={emoji}
+                                        variant={sticker === emoji ? "danger" : "outline-danger"}
+                                        size="sm"
+                                        style={{ marginRight: "0.25rem", marginBottom: "0.25rem", fontSize: "1.25rem"}}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setSticker(emoji);
+                                        }}>
+                                            {emoji}
+                                    </Button>
+                                ))}
+                            </div>
                             <textarea
                                 placeholder="Write your review..."
                                 rows="4"
                                 className="form-control"
                                 onChange={(e) => reviewRef.current = e.target.value}
                             ></textarea>
-
                             <Button
                                 variant="success"
                                 style={{ marginTop: "0.5rem" }}
@@ -122,7 +143,8 @@ export default function RestaurantCard(props) {
 
                                     move(props.page, "review", props.name, {
                                         text: reviewRef.current,
-                                        rating: rating
+                                        rating: rating,
+                                        sticker: sticker
                                     });
                                 }}
                             >

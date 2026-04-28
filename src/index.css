@@ -9,3 +9,8 @@
     color: white;
     border-color: transparent;
 }
+.nav-link.active {
+    color: #ae1a1b !important;
+    font-weight: bold;
+    border-bottom: 2px solid #ae1a1b;
+}
