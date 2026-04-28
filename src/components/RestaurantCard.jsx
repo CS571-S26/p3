@@ -109,7 +109,7 @@ export default function RestaurantCard(props) {
                                 ))}
                             </div>
                             <div>
-                                {stickers.map((emoji) => (
+                                {stickers.map((emoji) => ( // the fun emoji sticker palette!
                                     <Button 
                                         key={emoji}
                                         variant={sticker === emoji ? "danger" : "outline-danger"}
