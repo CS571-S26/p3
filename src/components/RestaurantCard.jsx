@@ -138,10 +138,12 @@ export default function RestaurantCard(props) {
                                         </Button>
                                 ))}
                             </div>
-                            <label htmlFor={`review-${props.name}`} className="form-label">Review</label>
+                            <p style={{ marginBottom: "0.25rem" }}>Rating</p>
+                            <p style={{ marginBottom: "0.25rem" }}>Choose a vibe</p>
+                            <label htmlFor={`review-${props.name}`} className="form-label">Write your review</label>
                             <textarea
                                 id={`review-${props.name}`}
-                                placeholder="Write your review..."
+                                placeholder="Write text here..."
                                 rows="4"
                                 className="form-control"
                                 onChange={(e) => reviewRef.current = e.target.value}
