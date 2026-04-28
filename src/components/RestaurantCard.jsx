@@ -109,20 +109,15 @@ export default function RestaurantCard(props) {
                                 ))}
                             </div>
                             <div>
-                                {stickers.map((emoji) => {
-                                    const selected = sticker === emoji;
-                                    return (
-                                        <Button 
-                                            key={emoji}
-                                            size="sm"
-                                            style={{ 
-                                                marginRight: "0.25rem",
-                                                marginBottom: "0.25rem",
-                                                fontSize: "1.25rem",
-                                                borderRadius: "8px",
-                                                backgroundColor: selected ? "#ae1a1b" : "#fdeaea",
-                                                borderColor: "#e73a3b",
-                                                color: selected ? "white" : "#ae1a1b"
+                                {stickers.map((emoji) => (
+                                    <Button 
+                                        key={emoji}
+                                        variant={sticker === emoji ? "danger" : "outline-danger"}
+                                        size="sm"
+                                        style={{ 
+                                            marginRight: "0.25rem",
+                                            marginBottom: "0.25rem",
+                                            fontSize: "1.25rem",
                                             }}
                                             onClick={(e) => {
                                                 e.preventDefault();
@@ -130,8 +125,7 @@ export default function RestaurantCard(props) {
                                             }}>
                                                 {emoji}
                                         </Button>
-                                    );
-                                })}
+                                ))}
                             </div>
                             <textarea
                                 placeholder="Write your review..."
