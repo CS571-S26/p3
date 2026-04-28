@@ -142,7 +142,7 @@ export default function RestaurantCard(props) {
                                     const text = reviewRef.current?.trim();
 
                                     if (!text || rating === 0 || !sticker) {
-                                        window.alert("Please write review, star rate, and select a sticker to submit your review.");
+                                        window.alert("Make sure you write review, star rate, and select a sticker to submit your review.");
                                         return;
                                     }
 
