@@ -10,7 +10,7 @@ export default function RestaurantCard(props) {
     const savedRating = props.review?.rating || 0;
     const [sticker, setSticker] = useState("");
     const savedSticker = props.review?.sticker || "";
-    const stickers = ["😍", "😊", "😐", "😕", "🤢", "🥳", "💅", "🤌", "🍕", "🍣", "🍔", "🌮", "☕", "🍸", "🍾", "🍻", "🎉", "🔥"];
+    const stickers = ["😍", "😊", "😐", "😕", "🤢", "🥳", "💅", "🤌", "🍕", "🍣", "🍔", "🌮", "☕", "🍸", "🍾", "🍻", "🎉", "🔥"]; // AI emojis
 
     // state for show more toggle and save button
     const [showMore, toggleShowMore] = useState(false);
@@ -107,7 +107,7 @@ export default function RestaurantCard(props) {
                                             marginRight: "0.15rem"
                                         }}
                                         onClick={() => setRating(star)}
-                                        onKeyDown={(e) => {
+                                        onKeyDown={(e) => { // Can enter star rating w/ keyboard as well, got some AI help with structure of how to make each star keyboard-selectable
                                             if (e.key === "Enter" || e.key === " ") {
                                                 e.preventDefault();
                                                 setRating(star);
