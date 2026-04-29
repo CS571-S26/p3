@@ -1,8 +1,8 @@
 import { useContext, useState, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-import RestaurantsDataContext from "../../../contexts/RestaurantsDataContext";
-import RestaurantCard from "../../RestaurantCard";
+import RestaurantsDataContext from "../../contexts/RestaurantsDataContext";
+import RestaurantCard from "../RestaurantCard";
 
 export default function SavePage() { 
     const [restaurants, setRestaurants] = useContext(RestaurantsDataContext);
@@ -15,7 +15,7 @@ export default function SavePage() {
     }
 
     return <div>
-        <h2 style= {{ textAlign: "center", marginBottom: "3rem" }}>Saved Restaurants</h2>
+        <h2 style= {{ textAlign: "center", marginBottom: "3rem", marginTop: "4rem" }}>Saved Restaurants</h2>
         <Container>
             <Row className="g-3 align-items-start">
                 {restaurants.save.map((rest) => (

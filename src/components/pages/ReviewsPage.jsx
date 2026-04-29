@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import {Container, Row, Col } from "react-bootstrap";
 
-import RestaurantsDataContext from "../../../contexts/RestaurantsDataContext";
-import RestaurantCard from "../../RestaurantCard";
+import RestaurantsDataContext from "../../contexts/RestaurantsDataContext";
+import RestaurantCard from "../RestaurantCard";
 
 export default function ReviewedPage() {
     const [restaurants] = useContext(RestaurantsDataContext);
@@ -15,11 +15,11 @@ export default function ReviewedPage() {
     }
     
     return <div>
-        <h2 style= {{ textAlign: "center", marginBottom: "3rem" }}>Your Reviews</h2>
+        <h2 style= {{ textAlign: "center", marginBottom: "3rem", marginTop: "4rem" }}>Your Reviews</h2>
         <Container>
             <Row className="g-3 align-items-start">
                 {restaurants.review.map((rest) => (
-                    <Col xs={12} md={6} lg={4} key={rest.name}>
+                    <Col xs={12} md={8} lg={6} key={rest.name}>
                         <RestaurantCard {...rest} page="review"/>
                     </Col>
                 ))}

@@ -1,37 +1,16 @@
-import { useState, useContext } from "react";
-import { Container, Row, Col, Dropdown, ButtonGroup, Button } from "react-bootstrap";
+import { Dropdown, ButtonGroup, Button } from "react-bootstrap";
 
-import RestaurantsDataContext from "../../../contexts/RestaurantsDataContext";
-import RestaurantCard from "../../RestaurantCard";
-import "../../../index.css";
-
-export default function DiscoverPage() {
-    const [restaurants] = useContext(RestaurantsDataContext);
-    const [cuisineSelected, setCuisineSelected] = useState(new Set());
-    const [priceSelected, setPriceSelected] = useState("");
-    const [vibeSelected, setVibeSelected] = useState(new Set());
-
-    const toggleCuisine = (option) => {
-        setCuisineSelected((prev) => {
-            const next = new Set(prev);
-            next.has(option) ? next.delete(option) : next.add(option);
-            return next;
-        });
-    };
-
-    const toggleVibe = (option) => {
-        setVibeSelected((prev) => {
-            const next = new Set(prev);
-            next.has(option) ? next.delete(option) : next.add(option);
-            return next;
-        });
-    };
-    
-
+export default function RestaurantFilters({
+    priceSelected,
+    setPriceSelected,
+    cuisineSelected,
+    toggleCuisine,
+    vibeSelected,
+    toggleVibe,
+    onClear
+}) {
     return (
-        <div>
-            <h2 style={{ textAlign: "center", marginBottom: "3rem" }}>Discover Restaurants in Madison ➭</h2>
-            <div className="d-flex justify-content-center gap-2">
+        <div className="d-flex justify-content-center gap-2">
             <Dropdown>
                 <Dropdown.Toggle style={{ borderRadius: "50px" }} variant="danger" id="dropdownMenuButton">
                     Price
@@ -61,9 +40,9 @@ export default function DiscoverPage() {
                     </div>
                 </Dropdown.Menu>
             </Dropdown>
-            
+
             <Dropdown>
-                <Dropdown.Toggle style={{ borderRadius: "50px" }}variant="danger" id="dropdownMenuButton">
+                <Dropdown.Toggle style={{ borderRadius: "50px" }} variant="danger" id="dropdownMenuButton">
                     Cuisine
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -97,8 +76,8 @@ export default function DiscoverPage() {
                     </div>
                 </Dropdown.Menu>
             </Dropdown>
-            
-             <Dropdown>
+
+            <Dropdown>
                 <Dropdown.Toggle style={{ borderRadius: "50px" }} variant="danger" id="dropdownMenuButton">
                     Vibe
                 </Dropdown.Toggle>
@@ -119,7 +98,7 @@ export default function DiscoverPage() {
                             </Button>
                             <Button
                                 variant={vibeSelected.has("Family-friendly") ? "primary" : "outline-primary"}
-                                style = {{ fontSize: "0.8rem" }}
+                                style={{ fontSize: "0.8rem" }}
                                 onClick={() => toggleVibe("Family-friendly")}
                             >
                                 Family-friendly
@@ -146,7 +125,7 @@ export default function DiscoverPage() {
                             </Button>
                             <Button
                                 variant={vibeSelected.has("Outdoor seating") ? "primary" : "outline-primary"}
-                                style = {{ fontSize: "0.8rem" }}
+                                style={{ fontSize: "0.8rem" }}
                                 onClick={() => toggleVibe("Outdoor seating")}
                             >
                                 Outdoor seating
@@ -161,33 +140,14 @@ export default function DiscoverPage() {
                     </div>
                 </Dropdown.Menu>
             </Dropdown>
-            <Button 
-                style={{ borderRadius: "50px" }} 
-                variant="light" 
-                onClick={() => {
-                    setPriceSelected(""); 
-                    setCuisineSelected(new Set());
-                    setVibeSelected(new Set());
-                }}
+
+            <Button
+                style={{ borderRadius: "50px" }}
+                variant="light"
+                onClick={onClear}
             >
                 Clear Filters
             </Button>
-            </div>
-            <Container>
-                <Row className="g-4 mt-3">
-                    {restaurants.discoverable.filter((rest) => {
-                        const matchesPrice = priceSelected === "" || rest.cost === priceSelected;
-                        const matchesCuisine = cuisineSelected.size === 0 || rest.cuisine.some(c => cuisineSelected.has(c));
-                        const matchesVibe = vibeSelected.size === 0 || rest.vibe.some(v => vibeSelected.has(v));
-                        return matchesPrice && matchesCuisine && matchesVibe;
-                    })
-                    .map((rest) => (
-                        <Col xs={12} md={6} lg={4} key={rest.name}>
-                            <RestaurantCard {...rest} page="discoverable" />
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
         </div>
     );
 }

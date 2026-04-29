@@ -1,10 +1,10 @@
 import { HashRouter, Route, Routes } from "react-router";
 
 import MadEats from "../MadEats";
-import DiscoverPage from "./pages/DiscoverPage"
-import SavePage from "./pages/SavePage";
-import ReviewPage from "./pages/ReviewsPage";
-import PageNotFound from "./pages/PageNotFound";
+import DiscoverPage from "../pages/DiscoverPage"
+import SavePage from "../pages/SavePage";
+import ReviewPage from "../pages/ReviewsPage";
+import PageNotFound from "../pages/PageNotFound";
 
 export default function MadEatsRouter() {
     return <HashRouter>
