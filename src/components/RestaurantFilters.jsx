@@ -48,7 +48,7 @@ export default function RestaurantFilters({
                 <Dropdown.Menu>
                     <div className="px-2">
                         <ButtonGroup>
-                            <Button
+                            <Button // AI used to help with ???Selected.has logic
                                 variant={cuisineSelected.has("American") ? "danger" : "outline-danger"}
                                 onClick={() => toggleCuisine("American")}
                             >

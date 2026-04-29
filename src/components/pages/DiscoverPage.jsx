@@ -11,6 +11,7 @@ export default function DiscoverPage() {
     const [priceSelected, setPriceSelected] = useState("");
     const [vibeSelected, setVibeSelected] = useState(new Set());
 
+    // AI used to help with the useMemo hook and randomization logic
     const shuffled = useMemo(() => { // show restaurants in a random order
         const copy = [...restaurants.discoverable];
         for (let i = copy.length - 1; i > 0; i--) {

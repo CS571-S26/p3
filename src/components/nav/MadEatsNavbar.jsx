@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router";
 import logo from "../../imgs/logo.png";
 
 export default function MadEatsNavbar(props) {
-    return (
+    return ( // Used AI for formatting of navbar elements
     <>
       <Navbar expand="sm" className="navbar shadow-sm" collapseOnSelect>
         <Container>

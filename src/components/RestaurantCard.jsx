@@ -5,6 +5,7 @@ import RestaurantsDataContext from "../contexts/RestaurantsDataContext";
 import ReviewForm from "./reviewing/ReviewForm"
 import ReviewedCardHeader from "./reviewing/ReviewedCardHeader"
 
+// AI used to help with toggle functionality, overlay triggers, and breakup of review components
 export default function RestaurantCard(props) {
     const [restaurants, setRestaurants, move] = useContext(RestaurantsDataContext);
     const savedRating = props.review?.rating || 0;
