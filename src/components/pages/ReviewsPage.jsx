@@ -9,13 +9,13 @@ export default function ReviewedPage() {
 
     if (restaurants.review.length === 0) {
             return <div style= {{ textAlign: "center", marginBottom: "3rem" }}>
-                <h2 >Reviewed Restaurants</h2>
+                <h1>Reviewed Restaurants</h1>
                 <p>You have no restaurants reviewed. Go to Saved and start reviewing!</p>
             </div>
     }
     
     return <div>
-        <h2 style= {{ textAlign: "center", marginBottom: "3rem", marginTop: "4rem" }}>Your Reviews</h2>
+        <h1>Your Reviews</h1>
         <Container>
             <Row className="g-3 align-items-start">
                 {restaurants.review.map((rest) => (

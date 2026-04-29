@@ -6,6 +6,7 @@ import RestaurantsDataContext from "../contexts/RestaurantsDataContext";
 
 import restaurantsJSON from "../restaurants.json"
 
+//AI was used to help understand the syncRestaurants function, the functionality of the useEffect(), and understanding how to move each review to the reviews page went submitted
 export default function MadEats() {
     const [restaurants, setRestaurants] = useState({
         discoverable: [],

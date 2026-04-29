@@ -9,13 +9,13 @@ export default function SavePage() {
     
     if (restaurants.save.length === 0) {
             return <div style= {{ textAlign: "center", marginBottom: "3rem" }}>
-                <h2 >Saved Restaurants</h2>
+                <h1>Saved Restaurants</h1>
                 <p>You have no restaurants saved. Go to Discover and find some!</p>
             </div>
     }
 
     return <div>
-        <h2 style= {{ textAlign: "center", marginBottom: "3rem", marginTop: "4rem" }}>Saved Restaurants</h2>
+        <h1 style= {{ textAlign: "center", marginBottom: "3rem", marginTop: "4rem" }}>Saved Restaurants</h1>
         <Container>
             <Row className="g-3 align-items-start">
                 {restaurants.save.map((rest) => (

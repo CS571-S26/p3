@@ -12,7 +12,7 @@ export default function ReviewForm({ name, page, move }) {
     return (
         <div style={{ marginTop: "1rem" }}>
             <form>
-                <StarRating rating={rating} onSelect={setRating} />
+                <StarRating rating={rating} onSelect={setRating} /> 
                 <StickerRating sticker={sticker} setSticker={setSticker} />
                 <label htmlFor={`review-${name}`} className="form-label"><b>Write your review</b></label>
                 <textarea

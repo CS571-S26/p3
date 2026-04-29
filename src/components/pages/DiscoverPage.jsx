@@ -38,7 +38,7 @@ export default function DiscoverPage() {
     
     return (
         <div>
-            <h2 style={{ textAlign: "center", marginBottom: "2rem", marginTop: "4rem" }}>Discover Restaurants in Madison ➭</h2>
+            <h1 style={{ textAlign: "center", marginBottom: "2rem", marginTop: "4rem" }}>Discover Restaurants in Madison ➭</h1>
             <p style={{ textAlign: "center", marginBottom: "3rem" }}>Save ♡ restaurants based on your preferences and view them in your saved list!</p>
             <div className="d-flex justify-content-center gap-2">
             
