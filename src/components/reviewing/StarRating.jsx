@@ -1,6 +1,8 @@
 export default function StarRating({ rating, savedRating, onSelect }) {
     const displayRating = savedRating ?? rating;
 
+    //Stars for reviewing (can range 1-5)
+    //Accessible by using the tab and hitting enter or space key to select
     return (
         <div style={{ marginBottom: "0.5rem" }}>
             {[1, 2, 3, 4, 5].map((star) => (

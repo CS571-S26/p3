@@ -9,6 +9,7 @@ export default function ReviewForm({ name, page, move }) {
     const [rating, setRating] = useState(0);
     const [sticker, setSticker] = useState("");
 
+    //Holds the review text for each restaurant
     return (
         <div style={{ marginTop: "1rem" }}>
             <form>

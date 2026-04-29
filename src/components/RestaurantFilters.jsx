@@ -9,6 +9,7 @@ export default function RestaurantFilters({
     toggleVibe,
     onClear
 }) {
+    //filtering by price or cuisine or vibe
     return (
         <div className="d-flex justify-content-center gap-2">
             <Dropdown>

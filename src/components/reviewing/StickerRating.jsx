@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 const stickers = ["😍", "😊", "😐", "😕", "🤢", "🥳", "💅", "🤌", "🍕", "🍣", "🍔", "🌮", "☕", "🍸", "🍾", "🍻", "🎉", "🔥"];
 
 export default function StickerPicker({ sticker, setSticker }) {
+    //can select an emoji to describe the restaurant
     return (
         <div>
             {stickers.map((emoji) => (
